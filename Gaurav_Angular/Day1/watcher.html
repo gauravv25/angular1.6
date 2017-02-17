@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="tApp">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/scripts/angular/angular-csp.css">
+</head>
+
+<body data-ng-cloak>
+    <div data-ng-controller="PersonCtrl">
+        <div>
+            <label for="txtname">Name</label>
+            <input type="text" value="{{p.name}}">
+        </div>
+        <div>
+            <label for="txtage">Age</label>
+            <input type="text" ng-model="p.age" ng-change="updateflag(p.age)">
+        </div>
+        <div>
+            <button ng-click="update()" ng-disabled="flag">Update</button>
+        </div>
+    </div>
+    <script src="./public/scripts/angular/angular.js"></script>
+    <script>
+        angular.module('tApp', []);
+
+        function Person(n, a) {
+            this.name = n;
+            this.age = a;
+        }
+
+        angular.module('tApp').controller('PersonCtrl', function ($scope) {
+            $scope.p = new Person("Manish", 20);
+
+            $scope.update = function () {
+                if ($scope.p.age < 26)
+                    $scope.p.age++;
+                else
+                    $scope.flag = true;
+            }
+
+            $scope.updateflag = function (value) {
+                if (value < 26)
+                     $scope.flag = false;
+                else
+                    $scope.flag = true;
+            }
+
+            // $scope.$watch("p.age", function (newValue, oldValue) {
+            //     console.log(newValue + "---------" + oldValue);
+            //     if(newValue<26)
+            //         $scope.flag = false;
+            //     else
+            //         $scope.flag = true;
+            // });
+        });
+    </script>
+</body>
+
+</html>

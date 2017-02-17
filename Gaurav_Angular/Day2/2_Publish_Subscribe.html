@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html data-ng-app="tApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+
+<body>
+    <div ng-controller="CtrlOne">
+        <h2>Controller One Area</h2>
+        <input type="text" ng-model="name" ng-change="send(name)">
+    </div>
+    <hr/>
+    <div ng-controller="CtrlTwo">
+        <h2>Controller Two Area</h2>
+        <h3>Hello, {{name}}</h3>
+    </div>
+    <script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        angular.module('tApp', []).run(function ($rootScope) {
+            $rootScope.$on('DataEmitted', function (evt, args) {
+                $rootScope.$broadcast("DataDroadcasted", args);
+            });
+        });
+
+        angular.module('tApp').controller('CtrlOne', function ($scope) {
+            $scope.send = function (n) {
+                $scope.$emit("DataEmitted", {
+                    name: n
+                });
+            }
+        });
+
+        angular.module('tApp').controller('CtrlTwo', function ($scope) {
+            $scope.$on('DataDroadcasted', function(evt,args){
+                $scope.name = args.name;
+            });
+        });
+    </script>
+</body>
+
+</html>

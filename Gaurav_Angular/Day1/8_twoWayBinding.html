@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="tApp">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/scripts/angular/angular-csp.css">
+</head>
+
+<body data-ng-cloak>
+    <div data-ng-controller="CtrlOne">
+        <input type="text" ng-value="name">
+        <input type="text" ng-model="name">
+        <input type="text" ng-model="name" ng-model-options="{updateOn: 'blur'}">
+        <h1>Hello, {{name}}</h1>
+
+        <hr/>
+        <input type="text" ng-model="city">
+        <h1>From: {{city}}</h1>
+    </div>
+
+    <script src="./public/scripts/angular/angular.js"></script>
+    <script>
+        angular.module('tApp', []);
+
+        angular.module('tApp').controller('CtrlOne', function ($scope) {
+            $scope.name = "Manish";
+        });
+    </script>
+</body>
+</html>

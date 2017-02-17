@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="tApp">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/scripts/angular/angular-csp.css">
+</head>
+
+<body data-ng-cloak>
+    <div data-ng-controller="CalcCtrl">
+        <div>
+            <label for="txtnum1">Number One</label>
+            <input type="number" ng-model="num1" ng-init="num1=10">
+        </div>
+        <div>
+            <label for="txtnum2">Number Two</label>
+            <input type="number" ng-model="num2" ng-init="num2=10">
+        </div>
+        <div>
+            <h3>Result: {{result}}</h3>
+        </div>
+        <div>
+            <button ng-click="add(num1,num2)">Add</button>
+        </div>
+    </div>
+    <script src="./public/scripts/angular/angular.js"></script>
+    <script>
+        angular.module('tApp', []);
+
+        angular.module('tApp').controller('CalcCtrl', function ($scope) {
+            $scope.add = function (n1, n2) {
+                $scope.result = n1 + n2;
+            }
+        });
+    </script>
+</body>
+
+</html>

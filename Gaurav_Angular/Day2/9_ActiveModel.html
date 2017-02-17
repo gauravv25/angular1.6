@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-ng-app="tApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+
+<body>
+    <div ng-controller="CtrlOne">
+        <h2>Controller One Area</h2>
+        <input type="text" ng-model="name" ng-change="send(name)">
+    </div>
+    <hr/>
+    <div ng-controller="CtrlTwo">
+        <h2>Controller Two Area</h2>
+        <h3>Hello, {{name}}</h3>
+    </div>
+    <script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        angular.module('tApp', []);
+
+        angular.module('tApp').service('DataService', function ($rootScope) {
+            var data;
+            this.getData = function () {
+                return data;
+            }
+            this.setData = function (d) {
+                data = d;
+                $rootScope.$broadcast('authorChanged', {});
+            }
+        });
+
+        angular.module('tApp').controller('CtrlOne', function ($scope, DataService) {
+            $scope.send = function (n) {
+                DataService.setData(n);
+            }
+        });
+
+        angular.module('tApp').controller('CtrlTwo', function ($scope, DataService) {
+            $scope.$on('authorChanged', function (evt,args) {
+                $scope.name = DataService.getData();
+            })
+        });
+    </script>
+</body>
+
+</html>

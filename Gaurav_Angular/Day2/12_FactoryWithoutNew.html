@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html data-ng-app="tApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+
+<body>
+    <div ng-controller="CtrlOne">
+        <input type="number" ng-model="count" ng-change="set(count)">
+        <button ng-click="inc()">+</button>
+        <button ng-click="dec()">-</button>
+    </div>
+    <div ng-controller="CtrlTwo">
+        <input type="number" ng-model="count" ng-change="set(count)">
+        <button ng-click="inc()">+</button>
+        <button ng-click="dec()">-</button>
+    </div>
+    <script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        angular.module('tApp', []);
+
+        // angular.module('tApp').factory('CounterFactory', function () {
+        //     function Counter() {
+        //         var count = 0;
+        //         this.getCount = function () {
+        //             return count;
+        //         };
+        //         this.setCount = function (c) {
+        //             count = c;
+        //         };
+        //         this.increment = function () {
+        //             ++count;
+        //         };
+        //         this.decrement = function () {
+        //             --count;
+        //         };
+        //     }
+
+        //     return {
+        //         getCounter: function () {
+        //             return new Counter();
+        //         }
+        //     };
+        // });
+
+        angular.module('tApp').factory('CounterFactory', function () {
+            function Counter() {
+                var count = 0;
+                return {
+                    getCount: function () {
+                        return count;
+                    },
+                    setCount: function (c) {
+                        count = c;
+                    },
+                    increment: function () {
+                        ++count;
+                    },
+                    decrement: function () {
+                        --count;
+                    }
+                };
+            }
+
+            return {
+                getCounter: function () {
+                    return Counter();
+                }
+            };
+        });
+
+        angular.module('tApp').controller('CtrlOne', function ($scope, CounterFactory) {
+            var CounterService = CounterFactory.getCounter();
+            $scope.count = CounterService.getCount();
+
+            $scope.set = function (c) {
+                CounterService.setCount(c);
+            }
+
+            $scope.inc = function () {
+                CounterService.increment();
+                $scope.count = CounterService.getCount();
+            }
+
+            $scope.dec = function () {
+                CounterService.decrement();
+                $scope.count = CounterService.getCount();
+            }
+        });
+
+        angular.module('tApp').controller('CtrlTwo', function ($scope, CounterFactory) {
+            var CounterService = CounterFactory.getCounter();
+            $scope.count = CounterService.getCount();
+
+            $scope.set = function (c) {
+                CounterService.setCount(c);
+            }
+
+            $scope.inc = function () {
+                CounterService.increment();
+                $scope.count = CounterService.getCount();
+            }
+
+            $scope.dec = function () {
+                CounterService.decrement();
+                $scope.count = CounterService.getCount();
+            }
+        });
+    </script>
+</body>
+
+</html>

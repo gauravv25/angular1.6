@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="tApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Understanding Models</title>
+  <style type="text/css">
+		.options {
+		    background:#e3e2e2;
+		    min-height: 190px;
+		}
+		.options a {
+		    display:block;
+		    color: #9f9f9f;
+		    padding:12px 10px;
+		    background:#e3e2e2;
+		    border-bottom:1px solid #cac9c9;
+		    position:relative;
+		    cursor:pointer;
+		}
+		.options a:hover {
+		    color: #8e8e8e;
+		    background:#f4f4f4;
+		    -webkit-transition:0.1s linear background;
+		    -moz-transition:0.1s linear background;
+		    transition:0.1s linear background;
+		}
+		.options a.selected {
+		    color: #6f6f6f;
+		    background:#fff;
+		}
+		.options a.selected:hover {
+		    background:#f4f4f4;
+		}
+		.options a.selected:after {
+		    content:"\2713";
+		    position:absolute;
+		    right:10px;
+		    top:50%;
+		    font-size:20px;
+		    margin-top:-10px;
+		}
+		.options a.no-border {
+		    border:none;
+		}
+		textarea {
+		    height: 175px;
+		    width: 100%;
+		    resize: none;
+		}
+		.padtop {
+		    padding-top: 5px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="./public/scripts/angular/angular-csp.css">
+</head>
+<body ng-cloak>
+	<div class="options" ng-controller="AuthorListCtrl">
+		<div class="options">
+			<a  data-ng-repeat="author in list" ng-click="selectQuote(author)" 
+                class="{{isSelected(author) && 'selected' || ''}}">{{author.name}}</a>
+		</div>
+        <div class="padtop">
+            <textarea readonly>{{selectedAuthor.quote}}</textarea>
+        </div>
+	</div>
+
+	<script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>	
+	<script type="text/javascript">
+		var tApp=angular.module('tApp', []);
+
+		tApp.controller("AuthorListCtrl",function($scope){
+			var fowler = {
+	            name: "Fowler",
+	            quote: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+	        },
+	        twain = {
+	            name: "Twain",
+	            quote: "Why, I have known clergymen, good men, kind-hearted, liberal, sincere, and all that, who did not know the meaning of a 'flush.' It is enough to make one ashamed of one's species."
+	        },
+	        poe = {
+	            name: "Poe",
+	            quote: "Deep into that darkness peering, long I stood there, wondering, fearing, doubting, dreaming dreams no mortal ever dared to dream before."
+	        },
+	        plato = {
+	            name: "Plato",
+	            quote: "All things will be produced in superior quantity and quality, and with greater ease, when each man works at a single occupation, in accordance with his natural gifts, and at the right moment, without meddling with anything else. "
+	        };
+
+	        $scope.list = [twain, fowler, poe, plato];
+
+            $scope.selectQuote = function(author){
+                $scope.selectedAuthor = author;
+            }
+
+            $scope.isSelected = function(author){
+                return $scope.selectedAuthor === author;
+            }
+		});
+	</script>
+</body>
+</html>

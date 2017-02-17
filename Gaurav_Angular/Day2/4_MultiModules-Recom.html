@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-ng-app='rootApp'>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+</head>
+
+<body>
+    <div ng-controller="CtrlOne">
+        <h2>Controller One Area</h2>
+        <h3>{{name}}</h3>
+    </div>
+    <hr/>
+    <div ng-controller="CtrlTwo">
+        <h2>Controller Two Area</h2>
+        <h3>{{name}}</h3>
+    </div>
+    <script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        angular.module('tApp1', []);
+        angular.module('tApp1').controller('CtrlOne', function ($scope) {
+            $scope.name = "Controller 1 - tApp1"
+        });
+
+        angular.module('tApp2', []);
+        angular.module('tApp2').controller('CtrlTwo', function ($scope) {
+            $scope.name = "Controller 2 - tApp2"
+        });
+
+        angular.module('rootApp', ['tApp1','tApp2']);
+        
+    </script>
+</body>
+
+</html>

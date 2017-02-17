@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h1>Today is: <span id="sp1"></span></h1>
+        <button id="btnUpdate">Update</button>
+
+        <script src="./public/scripts/jquery/dist/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                var data = new Date();
+                $("#sp1").text(data);
+
+                $("#btnUpdate").click(function(){
+                    data = new Date();
+                    console.log(data);
+                    $("#sp1").text(data);
+                });
+            });
+        </script>
+    </body>
+</html>

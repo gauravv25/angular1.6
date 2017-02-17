@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html data-ng-app="tApp">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./public/scripts/angular/angular-csp.css">
+</head>
+<body data-ng-cloak>
+	<div ng-controller="Ctrl">
+		<h1>Today is: <span ng-bind="data"></span></h1>
+        <!--<input type="text" ng-model="data">-->
+		<button ng-click="update()">Ng Update</button>
+        <button id="btnJS">JS Update</button>
+	</div>
+
+	<script src="./public/scripts/angular/angular.min.js" type="text/javascript"></script>	
+	<script type="text/javascript">
+		angular.module('tApp', []);
+
+		angular.module('tApp').controller('Ctrl',function($scope){
+			$scope.data = new Date();
+
+			$scope.update = function(){
+				$scope.data = new Date();	
+			};
+
+            // document.getElementById("btnJS").addEventListener("click",function(){
+            //     $scope.data = new Date();
+            //     console.log($scope.data);
+            //     $scope.$digest();
+            // });
+            document.getElementById("btnJS").addEventListener("click",function(){
+                $scope.$apply(function(){
+                    $scope.data = new Date();
+                    console.log($scope.data);
+                });
+            });
+
+            $scope.$watch('data',function(newValue,oldValue){
+                console.log("Watch Called: " + newValue);
+            });
+		});
+	</script>
+</body>
+</html>

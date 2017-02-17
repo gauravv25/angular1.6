@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="tApp">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/scripts/angular/angular-csp.css">
+</head>
+
+<body data-ng-cloak>
+    <div data-ng-controller="CtrlOne">
+        <h1>{{message}}</h1>
+    </div>
+
+    <script src="./public/scripts/angular/angular.js"></script>
+    <script>
+        angular.module('tApp', []);
+
+        angular.module('tApp').controller('CtrlOne', function ($scope) {
+            $scope.message = "Hello " + "from " + "Controller One";
+        });
+    </script>
+</body>
+
+</html>

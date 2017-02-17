@@ -1,0 +1,26 @@
+{
+  "name": "day1",
+  "description": "nothign",
+  "main": "",
+  "authors": [
+    "Gaurav"
+  ],
+  "license": "mit",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/scripts",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.5.2"
+  }
+}
