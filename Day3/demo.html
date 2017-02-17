@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            function Person(a)
+            {
+                this.age = a;
+                var self = this;
+                this.growOld = function(){
+                    console.log(this);
+                    self.age+=1;
+                }
+            }
+
+            var p = new Person(20);
+
+            window.setInterval(p.growOld,1000);
+            setInterval(function(){
+                console.log(p.age);
+            },1000);
+        </script>
+    </body>
+</html>
